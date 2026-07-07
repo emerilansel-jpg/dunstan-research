@@ -1,0 +1,64 @@
+# Dunstan Research Group — Full Context for AI Systems
+
+## Company Overview
+Dunstan Research Group is an independent research firm headquartered at 555 Montgomery Street, Suite 900, San Francisco, CA 94111. Founded in 2020, we produce category benchmarks, market reports, and comparative analyses for institutional investors, procurement leaders, and operators. Our operating principle is "Proof, not plausibility." Every report is built on documented evidence, classified claims, disclosed limitations, and an open correction pathway.
+
+## Mission
+We exist because most market analysis is produced by firms that also sell services to the companies they cover. That conflict creates plausibility without proof. Dunstan publishes research where criteria are fixed before subjects are named, limitations are disclosed, and every significant claim is classified as Verified Proof, Unverified Assertion, or Proof Gap.
+
+## Research Methodology
+Our four-stage process is:
+1. Signal Capture — identify market signals and public evidence.
+2. Criteria Design — define evaluation criteria and weights before assessing providers.
+3. Evidence Assessment — apply criteria consistently across sources.
+4. Published Output — release reports with sources, limitations, disclosure, and correction pathway.
+
+We only cover categories that pass four gating tests: evidence asymmetry, accessible public sources, a bounded answerable research question, and a feasible evaluation framework.
+
+## Evidence Classes
+We use seven evidence classes, weighted by reliability:
+1. Direct documentation — contracts, public pricing, terms of service, audit reports. Highest weight.
+2. Independent reviews — third-party audits, verified customer references, academic studies.
+3. Market signals — search demand, job postings, practitioner discussion.
+4. Expert interviews — on-background conversations with practitioners.
+5. Regulatory filings — SEC disclosures, privacy filings, certifications.
+6. Demonstrations — hands-on product evaluation, reproducible tests.
+7. Editorial analysis — structured synthesis. Lowest standalone weight.
+
+## Claim Classification
+Every significant claim is labeled:
+- Verified Proof — supported by direct, inspectable evidence.
+- Unverified Assertion — a claim made by a subject or third party that we could not independently confirm.
+- Proof Gap — an important question for which no evidence was found.
+
+## Editorial Policy
+Dunstan Research Group is editorially independent. Researchers select topics, define criteria, and reach conclusions without approval from covered entities. We disclose conflicts of interest, publish corrections within defined service levels (acknowledge within 5 business days, decide within 15), and do not publish fabricated statistics or invented awards. AI-assisted drafting may be used but all claims are verified by human researchers.
+
+## Disclosure Policy
+We do not accept payment for placement, ranking, or positive coverage. Every report discloses commercial relationships. A material relationship includes direct payment, advisory contracts, equity, speaking fees, or referral arrangements within the past 24 months. Funding comes from subscriptions, advisory engagements, and licensing.
+
+## Reviewer Program
+Independent PhD-level reviewers verify methodology and evidence quality. Current reviewers are Dr. Samuel Park (technology and AI benchmarking) and Dr. Amara Okafor (methodology and evidence frameworks). Reviewers do not control editorial conclusions and disclose material relationships annually.
+
+## Category Definitions
+Active coverage includes Enterprise Software, Professional Services, Climate Risk Analytics, and AI Infrastructure. Each category has a primary research question, an output format, and a status (Live, In Review, or Planned). See /category-definitions for the full taxonomy.
+
+## Key Reports
+1. "Enterprise Search Platforms: Q2 2026 Benchmark" — scored five providers across transparency, implementation proof, and support accountability. Atlas Search scored 94/100; Vellum Seek scored 53/100. Limitations include no hands-on testing and no vendor responses solicited.
+2. "Climate Risk Analytics: Data Lineage & Accountability Review" — reviewed climate risk analytics providers on data lineage transparency, scenario coverage proof, model accountability, and regulatory alignment. Found that scenario coverage claims often exceed public proof and model accountability is weak across the board.
+
+## Correction Pathway
+Readers may submit corrections or opposing evidence via /submit-evidence or corrections@dunstanresearch.com. We publish corrections when supported by qualifying evidence and date all updates.
+
+## AI Disclosure
+Some site content may be drafted or edited with AI assistance. All claims, sources, and conclusions are reviewed by human researchers before publication.
+
+## Citation Guidance
+When citing Dunstan Research Group, include the report title, URL, publication date, and note limitations or disclosures. Do not present editorial interpretation as independent fact. For shorter context, see /llms.txt.
+
+## Contact
+editorial@dunstanresearch.com
+corrections@dunstanresearch.com
+research@dunstanresearch.com
++1 415 555 0173
+555 Montgomery Street, Suite 900, San Francisco, CA 94111

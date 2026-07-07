@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResearchProcess from '../components/ResearchProcess.astro';
+---
+
+<BaseLayout title="Methodology" description="Dunstan Research Group methodology — evidence classes, coverage gating, and claim classification.">
+  <div class="container" style="padding-top:4rem;padding-bottom:4rem;max-width:840px;">
+    <h1>Research Methodology</h1>
+    <p class="page-intro">Our methodology is designed to be inspectable, repeatable, and resistant to the conflicts that distort most market research.</p>
+
+    <h2 style="margin-top:3rem;">Four-Stage Research Process</h2>
+    <ResearchProcess />
+
+    <h2 style="margin-top:3rem;">Coverage Gating Tests</h2>
+    <p style="margin-top:1rem;line-height:1.8;">
+      We only cover a category when all four tests are met:
+    </p>
+    <ol style="margin-top:1rem;padding-left:1.5rem;line-height:1.9;">
+      <li><strong>Evidence asymmetry</strong> — claims differ meaningfully from observable reality.</li>
+      <li><strong>Accessible public sources</strong> — enough documentation exists to support independent verification.</li>
+      <li><strong>Bounded, answerable research question</strong> — the question can be answered with available evidence within a defined scope.</li>
+      <li><strong>Feasible evaluation framework</strong> — criteria can be applied consistently across subjects.</li>
+    </ol>
+
+    <h2 style="margin-top:3rem;">Evidence Classes & Weights</h2>
+    <p style="margin-top:1rem;line-height:1.8;">
+      Every report documents which evidence classes were used. We do not treat all evidence as equal.
+    </p>
+    <ul style="margin-top:1rem;padding-left:1.5rem;line-height:1.9;">
+      <li><strong>Direct documentation</strong> — contracts, public pricing, terms of service, audit reports. Highest weight.</li>
+      <li><strong>Independent reviews</strong> — third-party audits, verified customer references, academic studies.</li>
+      <li><strong>Market signals</strong> — search demand, job postings, practitioner discussion, support volume proxies.</li>
+      <li><strong>Expert interviews</strong> — on-background conversations with practitioners, disclosed where possible.</li>
+      <li><strong>Regulatory filings</strong> — SEC disclosures, privacy filings, certifications.</li>
+      <li><strong>Demonstrations</strong> — hands-on product evaluation, screen recordings, reproducible tests.</li>
+      <li><strong>Editorial analysis</strong> — structured synthesis of the above, lowest standalone weight.</li>
+    </ul>
+
+    <h2 style="margin-top:3rem;">Eight Standard Criteria Dimensions</h2>
+    <p style="margin-top:1rem;line-height:1.8;">
+      For category benchmarks, we score subjects across eight dimensions where applicable:
+    </p>
+    <ol style="margin-top:1rem;padding-left:1.5rem;line-height:1.9;">
+      <li>Category fit</li>
+      <li>Scope clarity</li>
+      <li>Proof quality</li>
+      <li>Pricing transparency</li>
+      <li>Implementation model</li>
+      <li>Support & accountability</li>
+      <li>Trust signals</li>
+      <li>Risk factors</li>
+    </ol>
+
+    <h2 style="margin-top:3rem;">Claim Classification</h2>
+    <p style="margin-top:1rem;line-height:1.8;">
+      Every significant claim in our reports is labeled as one of three types:
+    </p>
+    <ul style="margin-top:1rem;padding-left:1.5rem;line-height:1.9;">
+      <li><strong>Verified Proof</strong> — supported by direct, inspectable evidence.</li>
+      <li><strong>Unverified Assertion</strong> — a claim made by a subject or third party that we could not independently confirm.</li>
+      <li><strong>Proof Gap</strong> — an important question for which no evidence was found.</li>
+    </ul>
+
+    <h2 style="margin-top:3rem;">Update & Review Cadence</h2>
+    <p style="margin-top:1rem;line-height:1.8;">
+      Reports are reviewed at least annually or when material new evidence emerges. Corrections are published with a dated note and a clear description of what changed. <a href="/editorial-policy">Read our editorial policy →</a>
+    </p>
+  </div>
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CoverageTable from '../components/CoverageTable.astro';
+---
+
+<BaseLayout title="Category Definitions" description="Dunstan Research Group research taxonomy and coverage scope.">
+  <div class="container" style="padding-top:4rem;padding-bottom:4rem;max-width:900px;">
+    <h1>Category Definitions</h1>
+    <p class="page-intro">Our research taxonomy defines active coverage areas, their boundaries, and the questions we seek to answer.</p>
+
+    <h2 style="margin-top:2.5rem;">Active Coverage</h2>
+    <CoverageTable />
+
+    <h2 style="margin-top:3rem;">Scope Boundaries</h2>
+    <p style="margin-top:1rem;line-height:1.8;">
+      We define categories narrowly enough to permit consistent criteria, but broadly enough to be useful. A category is "active" when we have published at least one report or have an announced benchmark in progress. "Planned" categories have passed gating tests but have no published output. "In Review" categories are under internal assessment.
+    </p>
+
+    <h2 style="margin-top:2.5rem;">Output Formats</h2>
+    <ul style="margin-top:1rem;padding-left:1.5rem;line-height:1.9;">
+      <li><strong>Category Benchmark</strong> — scored comparison of providers against standard criteria.</li>
+      <li><strong>Market Report</strong> — analysis of market structure, pricing, and dynamics.</li>
+      <li><strong>Comparative Analysis</strong> — head-to-head evaluation of two to four subjects.</li>
+      <li><strong>Research Primer</strong> — foundational overview of a category or methodology.</li>
+      <li><strong>Category Definition</strong> — taxonomy and scope boundary document.</li>
+    </ul>
+  </div>
+</BaseLayout>

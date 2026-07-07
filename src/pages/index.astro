@@ -1,17 +1,154 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustBadge from '../components/TrustBadge.astro';
+import ResearchProcess from '../components/ResearchProcess.astro';
+import EditorialCommitments from '../components/EditorialCommitments.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import ReportCard from '../components/ReportCard.astro';
+import MetricsStrip from '../components/MetricsStrip.astro';
+import EvidenceClassifier from '../components/EvidenceClassifier.astro';
+import BenchmarkScorecard from '../components/BenchmarkScorecard.astro';
+import DisciplineCard from '../components/DisciplineCard.astro';
+import { getCollection } from 'astro:content';
 
+const posts = (await getCollection('research'))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home" description="Dunstan Research Group publishes independent, evidence-based research for decision-makers who require proof, not plausibility.">
+  <!-- Hero Section -->
+  <section style="background:var(--color-primary);color:#fff;padding:6rem 0;">
+    <div class="container">
+      <p style="opacity:0.7;letter-spacing:0.1em;text-transform:uppercase;font-size:0.85rem;margin-bottom:1rem;">
+        Independent Research · Evidence First
+      </p>
+      <h1 style="color:#fff;font-size:clamp(2.2rem,5vw,3.8rem);max-width:720px;line-height:1.2;">
+        Proof, not plausibility.
+      </h1>
+      <p style="opacity:0.85;font-size:1.15rem;max-width:620px;margin-top:1.5rem;line-height:1.7;">
+        Dunstan Research Group produces inspectable category benchmarks, market analysis, and methodology-driven research for operators, investors, and procurement teams.
+      </p>
+      <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="/insights" style="background:var(--color-accent);color:#fff;padding:0.85rem 2rem;border-radius:var(--radius);font-weight:600;">
+          Read Our Research
+        </a>
+        <a href="/methodology" style="border:2px solid rgba(255,255,255,0.5);color:#fff;padding:0.85rem 2rem;border-radius:var(--radius);font-weight:600;">
+          See Our Methodology
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section style="padding:2rem 0;background:var(--color-surface);border-bottom:1px solid var(--color-border);">
+    <div class="container" style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+      <TrustBadge icon="✓" label="No pay-to-rank" />
+      <TrustBadge icon="✓" label="No pay-to-validate" />
+      <TrustBadge icon="📋" label="Published methodology" />
+      <TrustBadge icon="👤" label="Named reviewers" />
+      <TrustBadge icon="↺" label="Open corrections" />
+      <TrustBadge icon="⚠" label="Proof gaps disclosed" />
+      <TrustBadge icon="★" label="Evidence over advocacy" />
+      <TrustBadge icon="📝" label="Limitations documented" />
+    </div>
+  </section>
+
+  <!-- Research Problem -->
+  <section class="page-section" style="background:var(--color-surface);">
+    <div class="container" style="max-width:800px;">
+      <h2>The Research Problem</h2>
+      <p style="font-size:1.15rem;line-height:1.8;margin-top:1rem;color:var(--color-text);">
+        Most market analysis is produced by the people it benefits. We publish evidence-based research where every conclusion can be traced to documented sources, every claim is classified, and every limitation is disclosed.
+      </p>
+      <EvidenceClassifier />
+    </div>
+  </section>
+
+  <!-- Research Process -->
+  <section class="page-section">
+    <div class="container">
+      <h2>Our Research Process</h2>
+      <p class="page-intro">A repeatable, inspectable workflow designed to keep criteria fixed before conclusions are drawn.</p>
+      <ResearchProcess />
+    </div>
+  </section>
+
+  <!-- Featured Benchmark -->
+  <section class="page-section" style="background:var(--color-surface);">
+    <div class="container">
+      <h2>Featured Benchmark Spotlight</h2>
+      <p class="page-intro">A sample quality-fit ranking from our Enterprise Software category benchmark. Scores reflect documented evidence, not vendor narratives.</p>
+      <BenchmarkScorecard
+        title="Sample Category Quality-Fit Ranking"
+        scores={[
+          { provider: 'Platform A', score: 94 },
+          { provider: 'Platform B', score: 81 },
+          { provider: 'Platform C', score: 67 },
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Research Disciplines -->
+  <section class="page-section">
+    <div class="container">
+      <h2>Research Disciplines</h2>
+      <p class="page-intro">Named disciplines help readers understand our coverage scope and current capacity.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;margin-top:2rem;">
+        <DisciplineCard id="D-01" title="Vendor Proof Analysis" status="Active" description="Verify vendor capability claims against public documentation and independent evidence." />
+        <DisciplineCard id="D-02" title="Market Signal Review" status="Active" description="Map market demand, search signals, and practitioner discussion to identify research gaps." />
+        <DisciplineCard id="D-03" title="Trust Signal Benchmarks" status="Active" description="Score trust and accountability signals across providers using standardized criteria." />
+        <DisciplineCard id="D-04" title="Proof Framework Development" status="Pending confirmation" description="Build reusable proof criteria for emerging and rapidly shifting categories." />
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <section class="page-section" style="background:var(--color-surface);">
+    <div class="container">
+      <h2>Authority at a Glance</h2>
+      <MetricsStrip />
+    </div>
+  </section>
+
+  <!-- Editorial Commitments -->
+  <section class="page-section">
+    <div class="container">
+      <h2>Editorial Commitments</h2>
+      <p class="page-intro">Eight non-negotiable standards that govern everything we publish.</p>
+      <EditorialCommitments />
+    </div>
+  </section>
+
+  <!-- Recent Insights -->
+  <section class="page-section" style="background:var(--color-surface);">
+    <div class="container">
+      <h2>Recent Insights</h2>
+      <div style="margin-top:2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;">
+        {posts.map(post => (
+          <ReportCard
+            title={post.data.title}
+            description={post.data.description}
+            category={post.data.category}
+            outputFormat={post.data.outputFormat}
+            status={post.data.status}
+            publishDate={new Date(post.data.publishDate).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}
+            slug={post.id}
+            readingTime={Math.max(1, Math.round((post.body || '').split(/\s+/).length / 200))}
+          />
+        ))}
+      </div>
+      <div style="margin-top:2rem;">
+        <a href="/insights" class="btn btn-secondary">View All Insights</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="page-section">
+    <div class="container">
+      <NewsletterSignup />
+    </div>
+  </section>
+</BaseLayout>

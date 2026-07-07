@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Submit Evidence" description="Submit corrections or opposing evidence to Dunstan Research Group.">
+  <div class="container" style="padding-top:4rem;padding-bottom:4rem;max-width:720px;">
+    <h1>Submit Evidence</h1>
+    <p class="page-intro">We publish corrections when supported by qualifying evidence. Help us keep our research accurate and inspectable.</p>
+
+    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);padding:2rem;margin-top:2.5rem;">
+      <form action="mailto:corrections@dunstanresearch.com?subject=Evidence%20Submission" method="post" enctype="text/plain" style="display:grid;gap:1.25rem;">
+        <div>
+          <label for="report_url" style="display:block;font-weight:600;margin-bottom:0.35rem;">Report URL</label>
+          <input type="url" id="report_url" name="report_url" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--color-border);border-radius:var(--radius);" placeholder="https://dunstanresearch.com/research/..." />
+        </div>
+        <div>
+          <label for="claim" style="display:block;font-weight:600;margin-bottom:0.35rem;">Claim Being Disputed</label>
+          <textarea id="claim" name="claim" required rows="3" style="width:100%;padding:0.75rem 1rem;border:1px solid var(--color-border);border-radius:var(--radius);resize:vertical;"></textarea>
+        </div>
+        <div>
+          <label for="evidence" style="display:block;font-weight:600;margin-bottom:0.35rem;">Opposing Evidence</label>
+          <textarea id="evidence" name="evidence" required rows="5" style="width:100%;padding:0.75rem 1rem;border:1px solid var(--color-border);border-radius:var(--radius);resize:vertical;" placeholder="Include source URLs, documents, dates, and how the evidence contradicts the claim."></textarea>
+        </div>
+        <div>
+          <label for="email" style="display:block;font-weight:600;margin-bottom:0.35rem;">Your Email</label>
+          <input type="email" id="email" name="email" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--color-border);border-radius:var(--radius);" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-self:start;">Submit Evidence</button>
+      </form>
+    </div>
+
+    <div style="margin-top:2.5rem;">
+      <h2>What Qualifies as Evidence</h2>
+      <ul style="margin-top:1rem;padding-left:1.5rem;line-height:1.9;">
+        <li>Direct documentation (contracts, terms, audit reports, pricing pages).</li>
+        <li>Independent third-party sources with verifiable provenance.</li>
+        <li>Regulatory filings, court documents, or official certifications.</li>
+        <li>Reproducible demonstrations or test results.</li>
+      </ul>
+      <p style="margin-top:1rem;color:var(--color-muted);">
+        We do not act on anonymous accusations, unverifiable screenshots without context, or claims unsupported by documentation.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

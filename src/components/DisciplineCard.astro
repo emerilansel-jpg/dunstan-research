@@ -1,0 +1,14 @@
+---
+const { id, title, status, description } = Astro.props;
+---
+
+<div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);padding:1.5rem;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+    <span style="font-family:var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--color-primary);">{id}</span>
+    <span style={`font-size:0.7rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:999px;background:${status === 'Active' ? '#DCFCE7' : '#FEF3C7'};color:${status === 'Active' ? '#166534' : '#92400E'};`}>
+      {status}
+    </span>
+  </div>
+  <h3 style="font-size:1.05rem;">{title}</h3>
+  <p style="color:var(--color-muted);font-size:0.9rem;margin-top:0.5rem;line-height:1.5;">{description}</p>
+</div>

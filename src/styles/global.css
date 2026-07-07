@@ -1,0 +1,77 @@
+:root {
+  --color-primary:   #1B4D3E;   /* Forest green */
+  --color-accent:    #B87333;   /* Copper */
+  --color-bg:        #F5F1E8;   /* Cream */
+  --color-text:      #1F2937;   /* Charcoal */
+  --color-surface:   #FFFFFF;   /* White */
+  --color-muted:     #5F6B7A;
+  --color-border:    #D8CFC0;
+
+  --font-heading:    'Libre Baskerville', Georgia, serif;
+  --font-body:       'DM Sans', system-ui, sans-serif;
+
+  --max-width:       1200px;
+  --radius:          8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; height: auto; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.page-section { padding: 5rem 0; }
+
+.page-intro {
+  color: var(--color-muted);
+  margin-top: 0.75rem;
+  max-width: 640px;
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 1.25rem; }
+  .page-section { padding: 3.5rem 0; }
+}

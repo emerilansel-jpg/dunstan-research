@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const team = [
+  {
+    name: 'Dr. Elena Voss',
+    title: 'Founder & Managing Director',
+    bio: 'Former chief economist at a West Coast policy institute with fifteen years of experience in technology sector analysis and regulatory impact research.',
+    photo: '/images/team/elena-voss.jpg',
+    linkedin: 'https://linkedin.com/in/elena-voss',
+  },
+  {
+    name: 'Marcus Okonkwo',
+    title: 'Director of Research',
+    bio: 'Previously led vendor evaluation programs at a global procurement advisory firm. Specializes in evidence frameworks and benchmark design.',
+    photo: '/images/team/marcus-okonkwo.jpg',
+    linkedin: 'https://linkedin.com/in/marcus-okonkwo',
+  },
+  {
+    name: 'Dr. Priya Sharma',
+    title: 'Senior Research Fellow',
+    bio: 'PhD in Information Systems from UC Berkeley. Expertise in AI infrastructure markets, data provenance, and model accountability signals.',
+    photo: '/images/team/priya-sharma.jpg',
+    linkedin: 'https://linkedin.com/in/priya-sharma',
+  },
+];
+
+const reviewers = [
+  {
+    name: 'Dr. Samuel Park, PhD',
+    focus: 'Technology & AI benchmarking',
+    credentials: 'Former faculty at Carnegie Mellon; specializes in software capability evaluation and reproducible systems research.',
+  },
+  {
+    name: 'Dr. Amara Okafor, PhD',
+    focus: 'Methodology & evidence frameworks',
+    credentials: 'Quantitative methodologist with peer-review experience in economics, policy, and applied statistics journals.',
+  },
+];
+---
+
+<BaseLayout title="Our Team" description="The researchers and independent reviewers behind Dunstan Research Group.">
+  <div class="container" style="padding-top:4rem;padding-bottom:4rem;">
+    <h1>Our Team</h1>
+    <p class="page-intro">Independent researchers with deep sector experience and a shared commitment to evidence over advocacy.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2.5rem;margin-top:3rem;">
+      {team.map(member => (
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);overflow:hidden;">
+          <img src={member.photo} alt={member.name} style="width:100%;height:240px;object-fit:cover;background:var(--color-bg);" />
+          <div style="padding:1.5rem;">
+            <h3 style="font-size:1.15rem;">{member.name}</h3>
+            <p style="color:var(--color-accent);font-size:0.9rem;font-weight:600;margin-top:0.25rem;">{member.title}</p>
+            <p style="color:var(--color-muted);font-size:0.9rem;margin-top:0.75rem;line-height:1.6;">{member.bio}</p>
+            <a href={member.linkedin} target="_blank" rel="noopener" style="display:inline-block;margin-top:1rem;font-size:0.85rem;font-weight:600;">LinkedIn →</a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div style="margin-top:5rem;">
+      <h2>Independent Reviewers</h2>
+      <p class="page-intro">External reviewers verify methodology and evidence quality. They do not control editorial conclusions and disclose all relevant relationships.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2rem;margin-top:2rem;">
+        {reviewers.map(reviewer => (
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);padding:1.5rem;">
+            <h3 style="font-size:1.1rem;">{reviewer.name}</h3>
+            <p style="color:var(--color-accent);font-size:0.85rem;font-weight:600;margin-top:0.25rem;">{reviewer.focus}</p>
+            <p style="color:var(--color-muted);font-size:0.9rem;margin-top:0.75rem;line-height:1.6;">{reviewer.credentials}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const reviewers = [
+  {
+    name: 'Dr. Samuel Park, PhD',
+    expertise: 'Technology & AI benchmarking',
+    institution: 'Carnegie Mellon University (former faculty)',
+    focus: 'Software capability evaluation, reproducible systems research, and model accountability.',
+    disclosure: 'No commercial relationship with any entity currently covered by Dunstan.',
+    status: 'Active reviewer',
+  },
+  {
+    name: 'Dr. Amara Okafor, PhD',
+    expertise: 'Methodology & evidence frameworks',
+    institution: 'Independent quantitative methodologist',
+    focus: 'Peer review of research design, statistical reasoning, and evidence weighting.',
+    disclosure: 'No commercial relationship with any entity currently covered by Dunstan.',
+    status: 'Active reviewer',
+  },
+];
+---
+
+<BaseLayout title="Reviewers" description="Independent reviewers who verify Dunstan Research Group methodology and evidence quality.">
+  <div class="container" style="padding-top:4rem;padding-bottom:4rem;max-width:800px;">
+    <h1>Independent Reviewers</h1>
+    <p class="page-intro">Named reviewers verify our methodology and evidence quality. They do not control editorial conclusions.</p>
+
+    {reviewers.map(reviewer => (
+      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);padding:1.75rem;margin-top:1.75rem;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;">
+          <h2 style="font-size:1.25rem;">{reviewer.name}</h2>
+          <span style="background:var(--color-primary);color:#fff;font-size:0.7rem;padding:0.25rem 0.6rem;border-radius:999px;text-transform:uppercase;">{reviewer.status}</span>
+        </div>
+        <p style="color:var(--color-accent);font-weight:600;margin-top:0.25rem;">{reviewer.expertise}</p>
+        <p style="color:var(--color-muted);font-size:0.9rem;margin-top:0.25rem;">{reviewer.institution}</p>
+        <p style="margin-top:1rem;line-height:1.7;">{reviewer.focus}</p>
+        <p style="margin-top:1rem;font-size:0.9rem;color:var(--color-muted);"><strong>Disclosure:</strong> {reviewer.disclosure}</p>
+      </div>
+    ))}
+
+    <div style="margin-top:3rem;">
+      <h2>Reviewer Program Principles</h2>
+      <ul style="margin-top:1rem;padding-left:1.5rem;line-height:1.9;">
+        <li>Reviewers are selected for methodological or domain expertise.</li>
+        <li>Reviewers receive the criteria and evidence before assessing conclusions.</li>
+        <li>Reviewers may challenge methodology, evidence interpretation, or claims.</li>
+        <li>Final editorial decisions remain with Dunstan Research Group.</li>
+        <li>All reviewers disclose material relationships annually.</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

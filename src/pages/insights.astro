@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ReportCard from '../components/ReportCard.astro';
+import FilterTabs from '../components/FilterTabs.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('research'))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<BaseLayout title="Insights" description="Research and analysis from Dunstan Research Group.">
+  <div class="container" style="padding-top:4rem;padding-bottom:4rem;">
+    <h1>Insights & Analysis</h1>
+    <p class="page-intro">Inspectable research across enterprise software, professional services, climate risk analytics, and AI infrastructure.</p>
+
+    <FilterTabs />
+
+    <div style="margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;">
+      {posts.map(post => (
+        <ReportCard
+          title={post.data.title}
+          description={post.data.description}
+          category={post.data.category}
+          outputFormat={post.data.outputFormat}
+          status={post.data.status}
+          publishDate={new Date(post.data.publishDate).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}
+            slug={post.id}
+            readingTime={Math.max(1, Math.round((post.body || '').split(/\s+/).length / 200))}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

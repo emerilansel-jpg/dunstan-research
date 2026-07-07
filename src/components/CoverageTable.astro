@@ -1,0 +1,35 @@
+---
+const rows = [
+  { category: 'Enterprise Software', question: 'Which vendors publish verifiable proof of implementation scale and support accountability?', format: 'Category Benchmark', status: 'Live' },
+  { category: 'Professional Services', question: 'How transparent are pricing models and outcome accountability frameworks?', format: 'Market Report', status: 'Live' },
+  { category: 'Climate Risk Analytics', question: 'What evidence supports vendor claims about scenario coverage and data lineage?', format: 'Category Benchmark', status: 'Planned' },
+  { category: 'AI Infrastructure', question: 'Which providers disclose model provenance, uptime proof, and pricing mechanics?', format: 'Comparative Analysis', status: 'In Review' },
+];
+---
+
+<div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;font-size:0.9rem;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);">
+    <thead>
+      <tr style="border-bottom:2px solid var(--color-border);background:var(--color-bg);">
+        <th style="text-align:left;padding:0.85rem;">Category</th>
+        <th style="text-align:left;padding:0.85rem;">Primary Research Question</th>
+        <th style="text-align:left;padding:0.85rem;">Output Format</th>
+        <th style="text-align:left;padding:0.85rem;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map(row => (
+        <tr style="border-bottom:1px solid var(--color-border);">
+          <td style="padding:0.85rem;font-weight:600;">{row.category}</td>
+          <td style="padding:0.85rem;color:var(--color-muted);">{row.question}</td>
+          <td style="padding:0.85rem;">{row.format}</td>
+          <td style="padding:0.85rem;">
+            <span style={`font-size:0.75rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:999px;color:#fff;background:${row.status === 'Live' ? '#1B4D3E' : row.status === 'In Review' ? '#B87333' : '#6B7280'};`}>
+              {row.status}
+            </span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Dunstan Research Group</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+  <style>
+    :root {
+      --primary: #1B4D3E;
+      --accent: #B87333;
+      --bg: #F5F1E8;
+      --text: #1F2937;
+      --surface: #FFFFFF;
+      --muted: #5F6B7A;
+      --border: #D8CFC0;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .app { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 220px;
+      background: var(--primary);
+      color: #fff;
+      padding: 1.5rem 1rem;
+      flex-shrink: 0;
+    }
+    .sidebar h1 { font-size: 1.1rem; margin-bottom: 2rem; }
+    .sidebar button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.85);
+      padding: 0.75rem 0.5rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      border-radius: var(--radius);
+    }
+    .sidebar button:hover, .sidebar button.active { background: rgba(255,255,255,0.12); color: #fff; }
+    .main { flex: 1; padding: 2rem; overflow-y: auto; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    h2 { color: var(--primary); margin-bottom: 1rem; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .field { display: flex; flex-direction: column; }
+    .field label { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.35rem; color: var(--primary); }
+    .field input, .field textarea, .field select {
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      background: var(--surface);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .full { grid-column: 1 / -1; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: var(--primary); color: #fff; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .status { margin-top: 1rem; padding: 0.75rem 1rem; border-radius: var(--radius); }
+    .status.success { background: #DCFCE7; color: #166534; }
+    .status.error { background: #FEE2E2; color: #991B1B; }
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .upload-zone:hover { border-color: var(--accent); }
+    .thumbs { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+    .thumb { position: relative; width: 100px; height: 100px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb button { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: #fff; border: none; padding: 0.3rem; font-size: 0.7rem; cursor: pointer; }
+    .login-box { max-width: 400px; margin: 10vh auto; background: var(--surface); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border); }
+    .login-box h1 { color: var(--primary); margin-bottom: 0.5rem; }
+    .login-box p { color: var(--muted); margin-bottom: 1.5rem; }
+    .login-box input { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: var(--radius); }
+    .hidden { display: none; }
+    .post-list { display: grid; gap: 0.75rem; }
+    .post-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .post-item a { color: var(--accent); font-weight: 600; }
+    code { background: #E5E7EB; padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.85rem; }
+    .settings-grid { max-width: 600px; }
+  </style>
+</head>
+<body>
+  <div id="login-screen">
+    <div class="login-box">
+      <h1>Dunstan Admin</h1>
+      <p>Password-protected CMS for publishing research.</p>
+      <input type="password" id="login-password" placeholder="Admin password" />
+      <button class="btn btn-primary" onclick="signIn()" style="width:100%;">Sign In</button>
+      <p style="margin-top:1rem;font-size:0.85rem;"><a href="#" onclick="showSettingsFromLogin();return false;">Configure settings</a></p>
+      <div id="login-status" style="margin-top:1rem;"></div>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <h1>Dunstan CMS</h1>
+      <button class="active" onclick="showPanel('new-post')">New Post</button>
+      <button onclick="showPanel('existing-posts')">Existing Posts</button>
+      <button onclick="showPanel('settings')">Settings</button>
+      <button onclick="signOut()">Sign Out</button>
+    </aside>
+    <main class="main">
+      <div id="panel-new-post" class="panel active">
+        <h2>New Research Post</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="post-title">Title</label>
+            <input type="text" id="post-title" placeholder="Article Title" oninput="autoSlug()" />
+          </div>
+          <div class="field">
+            <label for="post-slug">Slug</label>
+            <input type="text" id="post-slug" placeholder="article-slug" />
+          </div>
+          <div class="field full">
+            <label for="post-description">Description</label>
+            <textarea id="post-description" placeholder="1–2 sentence summary"></textarea>
+          </div>
+          <div class="field">
+            <label for="post-author">Author</label>
+            <input type="text" id="post-author" placeholder="Dr. Priya Sharma" />
+          </div>
+          <div class="field">
+            <label for="post-reviewer">Reviewer</label>
+            <input type="text" id="post-reviewer" placeholder="Dr. Samuel Park, PhD" />
+          </div>
+          <div class="field">
+            <label for="post-category">Category</label>
+            <input type="text" id="post-category" placeholder="Enterprise Software" />
+          </div>
+          <div class="field">
+            <label for="post-subcategory">Subcategory</label>
+            <input type="text" id="post-subcategory" placeholder="Enterprise Search" />
+          </div>
+          <div class="field">
+            <label for="post-output-format">Output Format</label>
+            <select id="post-output-format">
+              <option value="Market Report">Market Report</option>
+              <option value="Category Benchmark">Category Benchmark</option>
+              <option value="Comparative Analysis">Comparative Analysis</option>
+              <option value="Research Primer">Research Primer</option>
+              <option value="Category Definition">Category Definition</option>
+              <option value="Evidence Submission">Evidence Submission</option>
+              <option value="Company News">Company News</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="post-status">Status</label>
+            <select id="post-status">
+              <option value="Live">Live</option>
+              <option value="In Review">In Review</option>
+              <option value="Planned">Planned</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="post-research-question">Research Question</label>
+            <input type="text" id="post-research-question" placeholder="The single question this report answers" />
+          </div>
+          <div class="field full">
+            <label for="post-evidence-classes">Evidence Classes (comma-separated)</label>
+            <input type="text" id="post-evidence-classes" placeholder="direct-documentation, independent-reviews, market-signals" />
+          </div>
+          <div class="field full">
+            <label for="post-disclosure">Disclosure</label>
+            <textarea id="post-disclosure">No commercial relationship with any provider named in this report.</textarea>
+          </div>
+          <div class="field full">
+            <label for="post-limitations">Limitations</label>
+            <textarea id="post-limitations" placeholder="Scope boundaries, evidence gaps, time period"></textarea>
+          </div>
+          <div class="field">
+            <label for="post-publish-date">Publish Date</label>
+            <input type="date" id="post-publish-date" />
+          </div>
+          <div class="field">
+            <label for="post-featured">Featured</label>
+            <select id="post-featured">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field full" style="margin-bottom:1rem;">
+          <label>Body</label>
+          <textarea id="post-body"></textarea>
+        </div>
+
+        <div class="upload-zone" id="body-upload-zone" onclick="document.getElementById('body-file-input').click()">
+          <p>Click or drop images here to upload for the article body</p>
+          <input type="file" id="body-file-input" multiple accept="image/*" class="hidden" onchange="handleBodyFiles(this.files)" />
+        </div>
+        <div class="thumbs" id="body-thumbs"></div>
+
+        <div style="margin-top:1.5rem;">
+          <label class="field" style="font-weight:600;color:var(--primary);display:block;margin-bottom:0.5rem;">Featured Image (uploaded on publish)</label>
+          <input type="file" id="hero-file-input" accept="image/*" onchange="handleHeroFile(this.files[0])" />
+          <div class="thumbs" id="hero-thumb"></div>
+        </div>
+
+        <div style="margin-top:2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-primary" id="publish-btn" onclick="publishPost()">Publish to GitHub</button>
+          <span id="publish-status"></span>
+        </div>
+      </div>
+
+      <div id="panel-existing-posts" class="panel">
+        <h2>Existing Posts</h2>
+        <p style="color:var(--muted);margin-bottom:1rem;">Posts loaded from GitHub repository. Click to view on site.</p>
+        <button class="btn btn-secondary" onclick="loadExistingPosts()" style="margin-bottom:1rem;">Refresh List</button>
+        <div id="existing-posts-list" class="post-list"></div>
+      </div>
+
+      <div id="panel-settings" class="panel">
+        <h2>Settings</h2>
+        <div class="settings-grid">
+          <div class="field" style="margin-bottom:1rem;">
+            <label for="setting-token">GitHub Personal Access Token</label>
+            <input type="password" id="setting-token" placeholder="ghp_..." />
+          </div>
+          <div class="field" style="margin-bottom:1rem;">
+            <label for="setting-repo">Repository</label>
+            <input type="text" id="setting-repo" placeholder="emerilansel-jpg/dunstan-research" />
+          </div>
+          <div class="field" style="margin-bottom:1rem;">
+            <label for="setting-branch">Branch</label>
+            <input type="text" id="setting-branch" value="main" />
+          </div>
+          <div class="field" style="margin-bottom:1.5rem;">
+            <label for="setting-hash">Bcrypt Password Hash</label>
+            <input type="text" id="setting-hash" placeholder="$2b$10$..." />
+            <p style="font-size:0.8rem;color:var(--muted);margin-top:0.35rem;">Default for jdp123: <code>$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq</code></p>
+          </div>
+          <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+          <div id="settings-status" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const CONFIG = {
+      tokenKey: 'dunstan_admin_token',
+      repoKey: 'dunstan_admin_repo',
+      branchKey: 'dunstan_admin_branch',
+      hashKey: 'dunstan_admin_hash',
+    };
+
+    let mde;
+    let heroImageData = null;
+    let heroImageName = '';
+    let uploadedBodyImages = [];
+
+    function getSetting(key, defaultValue) {
+      try { return localStorage.getItem(key) || defaultValue; } catch { return defaultValue; }
+    }
+
+    function setSetting(key, value) {
+      try { localStorage.setItem(key, value); } catch {}
+    }
+
+    function init() {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('post-publish-date').value = today;
+
+      mde = new EasyMDE({
+        element: document.getElementById('post-body'),
+        spellChecker: false,
+        placeholder: 'Write article body in Markdown...',
+        toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview', 'side-by-side', '|', 'guide'],
+        minHeight: '300px',
+      });
+
+      setupPasteDrop();
+
+      const savedHash = getSetting(CONFIG.hashKey, '');
+      if (!savedHash) {
+        setSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
+      }
+
+      document.getElementById('setting-token').value = getSetting(CONFIG.tokenKey, '');
+      document.getElementById('setting-repo').value = getSetting(CONFIG.repoKey, 'emerilansel-jpg/dunstan-research');
+      document.getElementById('setting-branch').value = getSetting(CONFIG.branchKey, 'main');
+      document.getElementById('setting-hash').value = getSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
+    }
+
+    function autoSlug() {
+      const title = document.getElementById('post-title').value;
+      if (!document.getElementById('post-slug').dataset.edited) {
+        document.getElementById('post-slug').value = title.toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .substring(0, 80)
+          .replace(/-$/, '');
+      }
+    }
+
+    document.getElementById('post-slug').addEventListener('input', function() {
+      this.dataset.edited = 'true';
+    });
+
+    function showSettingsFromLogin() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+      showPanel('settings');
+    }
+
+    async function signIn() {
+      const password = document.getElementById('login-password').value;
+      const hash = getSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
+      const status = document.getElementById('login-status');
+      if (!password) { status.innerHTML = '<div class="status error">Enter a password.</div>'; return; }
+      if (!window.dcodeIO || !window.dcodeIO.bcrypt) {
+        status.innerHTML = '<div class="status error">Bcrypt library not loaded. Please wait and retry.</div>';
+        return;
+      }
+      const valid = await window.dcodeIO.bcrypt.compare(password, hash);
+      if (valid) {
+        sessionStorage.setItem('dunstan_admin_authed', 'true');
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        showPanel('new-post');
+      } else {
+        status.innerHTML = '<div class="status error">Incorrect password.</div>';
+      }
+    }
+
+    function signOut() {
+      sessionStorage.removeItem('dunstan_admin_authed');
+      location.reload();
+    }
+
+    function showPanel(name) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + name).classList.add('active');
+      document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
+      event?.target?.classList.add('active');
+      if (name === 'existing-posts') loadExistingPosts();
+    }
+
+    function saveSettings() {
+      setSetting(CONFIG.tokenKey, document.getElementById('setting-token').value.trim());
+      setSetting(CONFIG.repoKey, document.getElementById('setting-repo').value.trim());
+      setSetting(CONFIG.branchKey, document.getElementById('setting-branch').value.trim());
+      setSetting(CONFIG.hashKey, document.getElementById('setting-hash').value.trim());
+      document.getElementById('settings-status').innerHTML = '<div class="status success">Settings saved.</div>';
+    }
+
+    function sanitizeFilename(name) {
+      return name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9._-]/g, '-').toLowerCase();
+    }
+
+    function setupPasteDrop() {
+      const cm = mde.codemirror;
+      cm.on('paste', (editor, e) => {
+        const items = e.clipboardData?.items;
+        if (!items) return;
+        for (const item of items) {
+          if (item.type.startsWith('image/')) {
+            e.preventDefault();
+            const file = item.getAsFile();
+            if (file) uploadBodyImage(file);
+            break;
+          }
+        }
+      });
+      cm.on('drop', (editor, e) => {
+        const files = e.dataTransfer?.files;
+        if (!files) return;
+        for (const file of files) {
+          if (file.type.startsWith('image/')) {
+            e.preventDefault();
+            uploadBodyImage(file);
+          }
+        }
+      });
+    }
+
+    async function githubApi(path, method = 'GET', body) {
+      const token = getSetting(CONFIG.tokenKey, '');
+      const repo = getSetting(CONFIG.repoKey, 'emerilansel-jpg/dunstan-research');
+      const branch = getSetting(CONFIG.branchKey, 'main');
+      const url = `https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`;
+      const opts = {
+        method,
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+      };
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch(url, opts);
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`GitHub API ${res.status}: ${text}`);
+      }
+      if (method === 'DELETE') return null;
+      return res.status === 204 ? null : res.json();
+    }
+
+    async function ensureDirectory(path) {
+      try {
+        await githubApi(path);
+      } catch (e) {
+        // Directory may not exist; GitHub has no explicit directory creation.
+      }
+    }
+
+    async function uploadImageToGithub(path, base64, message) {
+      const body = { message, content: base64, branch: getSetting(CONFIG.branchKey, 'main') };
+      try {
+        const existing = await githubApi(path);
+        if (existing && existing.sha) body.sha = existing.sha;
+      } catch {}
+      return githubApi(path, 'PUT', body);
+    }
+
+    async function uploadBodyImage(file) {
+      const status = document.getElementById('publish-status');
+      const slug = document.getElementById('post-slug').value || 'draft';
+      const name = sanitizeFilename(file.name);
+      const path = `public/images/posts/${slug}/${name}`;
+      try {
+        const base64 = await readFileBase64(file);
+        await uploadImageToGithub(path, base64, `cms: upload image ${name}`);
+        const markdown = `![${name}](/images/posts/${slug}/${name})`;
+        const cm = mde.codemirror;
+        cm.replaceSelection('\n\n' + markdown + '\n\n');
+        addBodyThumb(URL.createObjectURL(file), markdown);
+        uploadedBodyImages.push({ path, markdown });
+      } catch (err) {
+        status.innerHTML = `<div class="status error">Image upload failed: ${err.message}</div>`;
+      }
+    }
+
+    function handleBodyFiles(files) {
+      for (const file of files) uploadBodyImage(file);
+    }
+
+    function handleHeroFile(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        heroImageData = reader.result.split(',')[1];
+        heroImageName = sanitizeFilename(file.name);
+        document.getElementById('hero-thumb').innerHTML = `<div class="thumb"><img src="${reader.result}" alt="hero" /></div>`;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function addBodyThumb(url, markdown) {
+      const container = document.getElementById('body-thumbs');
+      const div = document.createElement('div');
+      div.className = 'thumb';
+      div.innerHTML = `<img src="${url}" alt="" /><button onclick='reinsertImage(${JSON.stringify(markdown)})'>Re-insert</button>`;
+      container.appendChild(div);
+    }
+
+    function reinsertImage(markdown) {
+      const cm = mde.codemirror;
+      cm.replaceSelection('\n\n' + markdown + '\n\n');
+    }
+
+    function readFileBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function buildFrontmatter() {
+      const title = document.getElementById('post-title').value;
+      const slug = document.getElementById('post-slug').value;
+      const description = document.getElementById('post-description').value;
+      const author = document.getElementById('post-author').value;
+      const reviewer = document.getElementById('post-reviewer').value;
+      const category = document.getElementById('post-category').value;
+      const subcategory = document.getElementById('post-subcategory').value;
+      const outputFormat = document.getElementById('post-output-format').value;
+      const status = document.getElementById('post-status').value;
+      const researchQuestion = document.getElementById('post-research-question').value;
+      const evidenceClasses = document.getElementById('post-evidence-classes').value.split(',').map(s => s.trim()).filter(Boolean);
+      const disclosure = document.getElementById('post-disclosure').value;
+      const limitations = document.getElementById('post-limitations').value;
+      const publishDate = document.getElementById('post-publish-date').value;
+      const featured = document.getElementById('post-featured').value === 'true';
+      const heroImage = heroImageName ? `/images/posts/${slug}/${heroImageName}` : '';
+
+      let fm = `---\n`;
+      fm += `title: "${title.replace(/"/g, '\\"')}"\n`;
+      fm += `description: "${description.replace(/"/g, '\\"')}"\n`;
+      fm += `publishDate: ${publishDate}\n`;
+      fm += `lastReviewed: ${publishDate}\n`;
+      fm += `author: "${author.replace(/"/g, '\\"')}"\n`;
+      if (reviewer) fm += `reviewer: "${reviewer.replace(/"/g, '\\"')}"\n`;
+      if (category) fm += `category: "${category.replace(/"/g, '\\"')}"\n`;
+      if (subcategory) fm += `subcategory: "${subcategory.replace(/"/g, '\\"')}"\n`;
+      fm += `outputFormat: "${outputFormat}"\n`;
+      fm += `researchQuestion: "${researchQuestion.replace(/"/g, '\\"')}"\n`;
+      if (evidenceClasses.length) {
+        fm += `evidenceClasses:\n`;
+        evidenceClasses.forEach(ec => fm += `  - ${ec}\n`);
+      }
+      fm += `disclosure: "${disclosure.replace(/"/g, '\\"')}"\n`;
+      fm += `limitations: "${limitations.replace(/"/g, '\\"')}"\n`;
+      fm += `featured: ${featured}\n`;
+      if (heroImage) fm += `heroImage: "${heroImage}"\n`;
+      fm += `status: "${status}"\n`;
+      fm += `---\n\n`;
+      return fm;
+    }
+
+    async function publishPost() {
+      const status = document.getElementById('publish-status');
+      const btn = document.getElementById('publish-btn');
+      const token = getSetting(CONFIG.tokenKey, '');
+      const repo = getSetting(CONFIG.repoKey, '');
+      if (!token || !repo) {
+        status.innerHTML = '<div class="status error">Configure GitHub token and repository in Settings first.</div>';
+        return;
+      }
+
+      const slug = document.getElementById('post-slug').value.trim();
+      const title = document.getElementById('post-title').value.trim();
+      if (!slug || !title) {
+        status.innerHTML = '<div class="status error">Title and slug are required.</div>';
+        return;
+      }
+
+      btn.disabled = true;
+      status.innerHTML = '<div class="status">Publishing...</div>';
+
+      try {
+        if (heroImageData && heroImageName) {
+          const heroPath = `public/images/posts/${slug}/${heroImageName}`;
+          await uploadImageToGithub(heroPath, heroImageData, `cms: upload hero image for ${slug}`);
+        }
+
+        const frontmatter = buildFrontmatter();
+        const body = mde.value();
+        const content = frontmatter + body;
+        const encoded = btoa(unescape(encodeURIComponent(content)));
+        const path = `src/content/research/${slug}.md`;
+
+        const putBody = {
+          message: `cms: publish ${title}`,
+          content: encoded,
+          branch: getSetting(CONFIG.branchKey, 'main'),
+        };
+        try {
+          const existing = await githubApi(path);
+          if (existing && existing.sha) putBody.sha = existing.sha;
+        } catch {}
+
+        await githubApi(path, 'PUT', putBody);
+        status.innerHTML = `<div class="status success">Published! Article will be live at /research/${slug} after rebuild (~90s).</div>`;
+      } catch (err) {
+        status.innerHTML = `<div class="status error">Publish failed: ${err.message}</div>`;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function loadExistingPosts() {
+      const container = document.getElementById('existing-posts-list');
+      const repo = getSetting(CONFIG.repoKey, '');
+      const token = getSetting(CONFIG.tokenKey, '');
+      if (!repo || !token) { container.innerHTML = '<p>Configure settings first.</p>'; return; }
+      container.innerHTML = '<p>Loading...</p>';
+      try {
+        const data = await githubApi('src/content/research');
+        if (!Array.isArray(data)) { container.innerHTML = '<p>No posts found.</p>'; return; }
+        const posts = data.filter(item => item.name.endsWith('.md'));
+        if (!posts.length) { container.innerHTML = '<p>No posts found.</p>'; return; }
+        container.innerHTML = posts.map(p => {
+          const slug = p.name.replace(/\.md$/, '');
+          return `<div class="post-item"><span>${p.name}</span><a href="/research/${slug}" target="_blank">View →</a></div>`;
+        }).join('');
+      } catch (err) {
+        container.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
