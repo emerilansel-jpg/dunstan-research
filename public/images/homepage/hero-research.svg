@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Independent research evidence visualization">
+  <defs>
+    <linearGradient id="dunstanHeroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="dunstanAccentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9A227"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </linearGradient>
+    <filter id="dunstanGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#dunstanHeroGrad)"/>
+  
+  <!-- Radial dotted pattern -->
+  <g fill="#475569" opacity="0.25">
+    <circle cx="200" cy="200" r="3"/>
+    <circle cx="250" cy="180" r="3"/>
+    <circle cx="300" cy="210" r="3"/>
+    <circle cx="350" cy="190" r="3"/>
+    <circle cx="400" cy="220" r="3"/>
+    <circle cx="450" cy="200" r="3"/>
+    <circle cx="500" cy="230" r="3"/>
+    <circle cx="150" cy="400" r="3"/>
+    <circle cx="200" cy="420" r="3"/>
+    <circle cx="250" cy="390" r="3"/>
+    <circle cx="300" cy="410" r="3"/>
+    <circle cx="350" cy="380" r="3"/>
+    <circle cx="900" cy="300" r="3"/>
+    <circle cx="950" cy="280" r="3"/>
+    <circle cx="1000" cy="310" r="3"/>
+    <circle cx="1050" cy="290" r="3"/>
+    <circle cx="850" cy="500" r="3"/>
+    <circle cx="900" cy="520" r="3"/>
+    <circle cx="950" cy="490" r="3"/>
+    <circle cx="1000" cy="510" r="3"/>
+  </g>
+  
+  <!-- Central proof network diagram -->
+  <g transform="translate(600, 400)" filter="url(#dunstanGlow)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="180" fill="none" stroke="#C9A227" stroke-width="2" opacity="0.6"/>
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#64748B" stroke-width="2" opacity="0.5"/>
+    <circle cx="0" cy="0" r="80" fill="#334155" stroke="#C9A227" stroke-width="3"/>
+    
+    <!-- Central checkmark -->
+    <path d="M-20,-5 L-5,15 L30,-20" fill="none" stroke="#C9A227" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Orbiting nodes -->
+    <circle cx="180" cy="0" r="14" fill="#C9A227"/>
+    <circle cx="0" cy="180" r="14" fill="#C9A227"/>
+    <circle cx="-180" cy="0" r="14" fill="#C9A227"/>
+    <circle cx="0" cy="-180" r="14" fill="#C9A227"/>
+    <circle cx="127" cy="127" r="10" fill="#64748B"/>
+    <circle cx="-127" cy="127" r="10" fill="#64748B"/>
+    <circle cx="127" cy="-127" r="10" fill="#64748B"/>
+    <circle cx="-127" cy="-127" r="10" fill="#64748B"/>
+  </g>
+  
+  <!-- Side score cards -->
+  <g transform="translate(140, 250)" filter="url(#dunstanGlow)">
+    <rect x="0" y="0" width="220" height="120" rx="8" fill="#334155" stroke="#C9A227" stroke-width="2"/>
+    <text x="20" y="40" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" fill="#94a3b8">Score</text>
+    <text x="20" y="80" font-family="Lora, Georgia, serif" font-size="40" font-weight="700" fill="#C9A227">94</text>
+    <text x="80" y="80" font-family="Source Sans Pro, system-ui, sans-serif" font-size="16" fill="#FAF9F6">/ 100</text>
+  </g>
+  
+  <g transform="translate(140, 420)" filter="url(#dunstanGlow)">
+    <rect x="0" y="0" width="220" height="120" rx="8" fill="#334155" stroke="#64748B" stroke-width="2"/>
+    <text x="20" y="40" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" fill="#94a3b8">Evidence</text>
+    <text x="20" y="80" font-family="Lora, Georgia, serif" font-size="28" font-weight="700" fill="#FAF9F6">Verified</text>
+  </g>
+  
+  <g transform="translate(840, 250)" filter="url(#dunstanGlow)">
+    <rect x="0" y="0" width="220" height="120" rx="8" fill="#334155" stroke="#C9A227" stroke-width="2"/>
+    <text x="20" y="40" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" fill="#94a3b8">Method</text>
+    <text x="20" y="80" font-family="Lora, Georgia, serif" font-size="28" font-weight="700" fill="#FAF9F6">Published</text>
+  </g>
+  
+  <g transform="translate(840, 420)" filter="url(#dunstanGlow)">
+    <rect x="0" y="0" width="220" height="120" rx="8" fill="#334155" stroke="#64748B" stroke-width="2"/>
+    <text x="20" y="40" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" fill="#94a3b8">Limitations</text>
+    <text x="20" y="80" font-family="Lora, Georgia, serif" font-size="28" font-weight="700" fill="#FAF9F6">Disclosed</text>
+  </g>
+</svg>

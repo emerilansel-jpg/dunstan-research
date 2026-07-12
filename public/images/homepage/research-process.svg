@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Inspectable research workflow">
+  <defs>
+    <linearGradient id="dunstanProcessBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAF9F6"/>
+      <stop offset="100%" stop-color="#f1f0ea"/>
+    </linearGradient>
+    <marker id="dunstanArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 L3,6 Z" fill="#C9A227"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="800" fill="url(#dunstanProcessBg)"/>
+  
+  <!-- Horizontal flow arrows -->
+  <line x1="220" y1="400" x2="360" y2="400" stroke="#C9A227" stroke-width="3" marker-end="url(#dunstanArrow)" opacity="0.8"/>
+  <line x1="460" y1="400" x2="600" y2="400" stroke="#C9A227" stroke-width="3" marker-end="url(#dunstanArrow)" opacity="0.8"/>
+  <line x1="700" y1="400" x2="840" y2="400" stroke="#C9A227" stroke-width="3" marker-end="url(#dunstanArrow)" opacity="0.8"/>
+  
+  <!-- Step 1 -->
+  <g transform="translate(120, 280)">
+    <rect x="0" y="0" width="160" height="240" rx="12" fill="#FFFFFF" stroke="#334155" stroke-width="2"/>
+    <circle cx="80" cy="60" r="32" fill="#C9A227"/>
+    <text x="80" y="70" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="22" font-weight="700" fill="#334155">01</text>
+    <text x="80" y="130" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Signal</text>
+    <text x="80" y="155" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Capture</text>
+    <text x="80" y="195" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">Market signals</text>
+    <text x="80" y="215" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">& public docs</text>
+  </g>
+  
+  <!-- Step 2 -->
+  <g transform="translate(360, 280)">
+    <rect x="0" y="0" width="160" height="240" rx="12" fill="#FFFFFF" stroke="#334155" stroke-width="2"/>
+    <circle cx="80" cy="60" r="32" fill="#C9A227"/>
+    <text x="80" y="70" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="22" font-weight="700" fill="#334155">02</text>
+    <text x="80" y="130" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Criteria</text>
+    <text x="80" y="155" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Design</text>
+    <text x="80" y="195" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">Fixed before</text>
+    <text x="80" y="215" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">conclusions</text>
+  </g>
+  
+  <!-- Step 3 -->
+  <g transform="translate(600, 280)">
+    <rect x="0" y="0" width="160" height="240" rx="12" fill="#FFFFFF" stroke="#334155" stroke-width="2"/>
+    <circle cx="80" cy="60" r="32" fill="#C9A227"/>
+    <text x="80" y="70" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="22" font-weight="700" fill="#334155">03</text>
+    <text x="80" y="130" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Evidence</text>
+    <text x="80" y="155" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Assessment</text>
+    <text x="80" y="195" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">Classify claims</text>
+    <text x="80" y="215" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">consistently</text>
+  </g>
+  
+  <!-- Step 4 -->
+  <g transform="translate(840, 280)">
+    <rect x="0" y="0" width="160" height="240" rx="12" fill="#FFFFFF" stroke="#C9A227" stroke-width="3"/>
+    <circle cx="80" cy="60" r="32" fill="#C9A227"/>
+    <text x="80" y="70" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="22" font-weight="700" fill="#334155">04</text>
+    <text x="80" y="130" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Published</text>
+    <text x="80" y="155" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Output</text>
+    <text x="80" y="195" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">Sources & limits</text>
+    <text x="80" y="215" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">included</text>
+  </g>
+  
+  <!-- Bottom trust row -->
+  <g transform="translate(150, 620)">
+    <rect x="0" y="0" width="180" height="44" rx="22" fill="#334155"/>
+    <text x="90" y="28" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FAF9F6">No pay-to-validate</text>
+  </g>
+  <g transform="translate(370, 620)">
+    <rect x="0" y="0" width="180" height="44" rx="22" fill="#334155"/>
+    <text x="90" y="28" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FAF9F6">Published methodology</text>
+  </g>
+  <g transform="translate(590, 620)">
+    <rect x="0" y="0" width="180" height="44" rx="22" fill="#334155"/>
+    <text x="90" y="28" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FAF9F6">Proof gaps disclosed</text>
+  </g>
+  <g transform="translate(810, 620)">
+    <rect x="0" y="0" width="180" height="44" rx="22" fill="#334155"/>
+    <text x="90" y="28" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FAF9F6">Limitations documented</text>
+  </g>
+</svg>

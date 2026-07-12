@@ -18,24 +18,31 @@ const posts = (await getCollection('research'))
 
 <BaseLayout title="Home" description="Dunstan Research Group publishes independent, evidence-based research for decision-makers who require proof, not plausibility.">
   <!-- Hero Section -->
-  <section style="background:var(--color-primary);color:#fff;padding:6rem 0;">
+  <section style="background:var(--color-primary);color:#fff;padding:6rem 0;overflow:hidden;">
     <div class="container">
-      <p style="opacity:0.7;letter-spacing:0.1em;text-transform:uppercase;font-size:0.85rem;margin-bottom:1rem;">
-        Independent Research · Evidence First
-      </p>
-      <h1 style="color:#fff;font-size:clamp(2.2rem,5vw,3.8rem);max-width:720px;line-height:1.2;">
-        Proof, not plausibility.
-      </h1>
-      <p style="opacity:0.85;font-size:1.15rem;max-width:620px;margin-top:1.5rem;line-height:1.7;">
-        Dunstan Research Group produces inspectable category benchmarks, market analysis, and methodology-driven research for operators, investors, and procurement teams.
-      </p>
-      <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
-        <a href="/insights" style="background:var(--color-accent);color:#fff;padding:0.85rem 2rem;border-radius:var(--radius);font-weight:600;">
-          Read Our Research
-        </a>
-        <a href="/methodology" style="border:2px solid rgba(255,255,255,0.5);color:#fff;padding:0.85rem 2rem;border-radius:var(--radius);font-weight:600;">
-          See Our Methodology
-        </a>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:3rem;align-items:center;">
+        <div>
+          <p style="opacity:0.7;letter-spacing:0.1em;text-transform:uppercase;font-size:0.85rem;margin-bottom:1rem;">
+            Independent Research · Evidence First
+          </p>
+          <h1 style="color:#fff;font-size:clamp(2.2rem,5vw,3.8rem);max-width:720px;line-height:1.2;">
+            Proof, not plausibility.
+          </h1>
+          <p style="opacity:0.85;font-size:1.15rem;max-width:620px;margin-top:1.5rem;line-height:1.7;">
+            Dunstan Research Group produces inspectable category benchmarks, market analysis, and methodology-driven research for operators, investors, and procurement teams.
+          </p>
+          <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="/insights" style="background:var(--color-accent);color:#fff;padding:0.85rem 2rem;border-radius:var(--radius);font-weight:600;">
+              Read Our Research
+            </a>
+            <a href="/methodology" style="border:2px solid rgba(255,255,255,0.5);color:#fff;padding:0.85rem 2rem;border-radius:var(--radius);font-weight:600;">
+              See Our Methodology
+            </a>
+          </div>
+        </div>
+        <div>
+          <img src="/images/homepage/hero-research.svg" alt="Research evidence visualization" style="width:100%;border-radius:var(--radius);box-shadow:0 20px 40px rgba(0,0,0,0.25);" />
+        </div>
       </div>
     </div>
   </section>
@@ -70,7 +77,10 @@ const posts = (await getCollection('research'))
     <div class="container">
       <h2>Our Research Process</h2>
       <p class="page-intro">A repeatable, inspectable workflow designed to keep criteria fixed before conclusions are drawn.</p>
-      <ResearchProcess />
+      <div style="margin:2.5rem 0;display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2rem;align-items:center;">
+        <img src="/images/homepage/research-process.svg" alt="Research process workflow" style="width:100%;border-radius:var(--radius);border:1px solid var(--color-border);" />
+        <ResearchProcess />
+      </div>
     </div>
   </section>
 
@@ -136,6 +146,7 @@ const posts = (await getCollection('research'))
             publishDate={new Date(post.data.publishDate).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}
             slug={post.id}
             readingTime={Math.max(1, Math.round((post.body || '').split(/\s+/).length / 200))}
+            heroImage={post.data.heroImage}
           />
         ))}
       </div>
