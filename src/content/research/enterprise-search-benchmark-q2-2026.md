@@ -17,7 +17,7 @@ evidenceClasses:
 disclosure: "No commercial relationship with any provider named in this report. Dunstan Research Group does not accept payment from vendors for coverage or placement."
 limitations: "Assessment based on publicly available documentation and signals as of June 2026. Pricing and feature sets may change. Vendor responses to information requests were not solicited for this benchmark."
 featured: true
-heroImage: "/images/posts/enterprise-search-benchmark-q2-2026/hero.png"
+heroImage: "/images/posts/enterprise-search-benchmark-q2-2026/hero.svg"
 status: "Live"
 ---
 

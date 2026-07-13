@@ -17,7 +17,7 @@ evidenceClasses:
 disclosure: "No commercial relationship with any provider named in this report. Dunstan Research Group does not accept sponsorship from covered entities."
 limitations: "Findings reflect publicly available documentation and a limited set of expert interviews conducted on background. Provider responses were not solicited. Scenario coverage claims could not be independently reproduced."
 featured: true
-heroImage: "/images/posts/climate-risk-data-lineage-2026/hero.png"
+heroImage: "/images/posts/climate-risk-data-lineage-2026/hero.svg"
 status: "Live"
 ---
 
