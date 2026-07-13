@@ -396,7 +396,7 @@
 
     async function signIn() {
       const password = document.getElementById('login-password').value;
-      const hash = getSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
+      const hash = getSetting(CONFIG.hashKey, '$2b$10$NndmOcW/36LW.nGhbdNOhOFKS1C1OjrhYiKJ77Ob5ebFsrnPUE8EK'); // jdp123
       const status = document.getElementById('login-status');
       if (!password) { status.innerHTML = '<div class="status error">Enter a password.</div>'; return; }
       if (!window.dcodeIO || !window.dcodeIO.bcrypt) {
@@ -754,7 +754,7 @@
         return;
       }
 
-      const hash = getSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
+      const hash = getSetting(CONFIG.hashKey, '$2b$10$NndmOcW/36LW.nGhbdNOhOFKS1C1OjrhYiKJ77Ob5ebFsrnPUE8EK'); // jdp123
       const valid = await window.dcodeIO.bcrypt.compare(current, hash);
       if (!valid) {
         status.innerHTML = '<div class="status error">Current password is incorrect.</div>';
