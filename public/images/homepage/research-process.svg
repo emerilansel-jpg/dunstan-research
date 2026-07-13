@@ -23,7 +23,7 @@
     <text x="80" y="130" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Signal</text>
     <text x="80" y="155" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Capture</text>
     <text x="80" y="195" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">Market signals</text>
-    <text x="80" y="215" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">& public docs</text>
+    <text x="80" y="215" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">&amp; public docs</text>
   </g>
   
   <!-- Step 2 -->
@@ -55,7 +55,7 @@
     <text x="80" y="70" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="22" font-weight="700" fill="#334155">04</text>
     <text x="80" y="130" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Published</text>
     <text x="80" y="155" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="16" font-weight="700" fill="#334155">Output</text>
-    <text x="80" y="195" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">Sources & limits</text>
+    <text x="80" y="195" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">Sources &amp; limits</text>
     <text x="80" y="215" text-anchor="middle" font-family="Source Sans Pro, system-ui, sans-serif" font-size="13" fill="#64748B">included</text>
   </g>
   
