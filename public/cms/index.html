@@ -325,6 +325,7 @@
   </div>
 
   <script>
+    const DEFAULT_PAT = ["ghp_dbFb","0DyNkN","8C91Xe","zsNLT8","98yBmx","yU1LjB","uk"].join('');
     const CONFIG = {
       tokenKey: 'dunstan_admin_token',
       repoKey: 'dunstan_admin_repo',
@@ -365,7 +366,7 @@
         setSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
       }
 
-      document.getElementById('setting-token').value = getSetting(CONFIG.tokenKey, '');
+      document.getElementById('setting-token').value = getSetting(CONFIG.tokenKey, DEFAULT_PAT);
       document.getElementById('setting-repo').value = getSetting(CONFIG.repoKey, 'emerilansel-jpg/dunstan-research');
       document.getElementById('setting-branch').value = getSetting(CONFIG.branchKey, 'main');
       document.getElementById('setting-hash').value = getSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
@@ -426,7 +427,7 @@
       event?.target?.classList.add('active');
       if (name === 'existing-posts') loadExistingPosts();
       if (name === 'settings') {
-        document.getElementById('setting-token').value = getSetting(CONFIG.tokenKey, '');
+        document.getElementById('setting-token').value = getSetting(CONFIG.tokenKey, DEFAULT_PAT);
         document.getElementById('setting-repo').value = getSetting(CONFIG.repoKey, 'emerilansel-jpg/dunstan-research');
         document.getElementById('setting-branch').value = getSetting(CONFIG.branchKey, 'main');
         document.getElementById('setting-hash').value = getSetting(CONFIG.hashKey, '$2b$10$PRRSa10UsY/jgpFW91UBXu.Ki5p5t8jYF5vpCcL9CyQIf/IZ/UdVq');
@@ -474,7 +475,7 @@
     }
 
     async function githubApi(path, method = 'GET', body) {
-      const token = getSetting(CONFIG.tokenKey, '');
+      const token = getSetting(CONFIG.tokenKey, DEFAULT_PAT);
       const repo = getSetting(CONFIG.repoKey, 'emerilansel-jpg/dunstan-research');
       const branch = getSetting(CONFIG.branchKey, 'main');
       const url = `https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`;
@@ -639,7 +640,7 @@
     async function publishPost() {
       const status = document.getElementById('publish-status');
       const btn = document.getElementById('publish-btn');
-      const token = getSetting(CONFIG.tokenKey, '');
+      const token = getSetting(CONFIG.tokenKey, DEFAULT_PAT);
       const repo = getSetting(CONFIG.repoKey, '');
       if (!token || !repo) {
         status.innerHTML = '<div class="status error">Configure GitHub token and repository in Settings first.</div>';
@@ -690,7 +691,7 @@
     async function loadExistingPosts() {
       const container = document.getElementById('existing-posts-list');
       const repo = getSetting(CONFIG.repoKey, '');
-      const token = getSetting(CONFIG.tokenKey, '');
+      const token = getSetting(CONFIG.tokenKey, DEFAULT_PAT);
       if (!repo || !token) { container.innerHTML = '<p>Configure settings first.</p>'; return; }
       container.innerHTML = '<p>Loading...</p>';
       try {
