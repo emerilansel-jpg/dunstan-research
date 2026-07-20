@@ -641,7 +641,7 @@
       const status = document.getElementById('publish-status');
       const btn = document.getElementById('publish-btn');
       const token = getSetting(CONFIG.tokenKey, DEFAULT_PAT);
-      const repo = getSetting(CONFIG.repoKey, '');
+      const repo = getSetting(CONFIG.repoKey, 'emerilansel-jpg/dunstan-research');
       if (!token || !repo) {
         status.innerHTML = '<div class="status error">Configure GitHub token and repository in Settings first.</div>';
         return;
@@ -690,7 +690,7 @@
 
     async function loadExistingPosts() {
       const container = document.getElementById('existing-posts-list');
-      const repo = getSetting(CONFIG.repoKey, '');
+      const repo = getSetting(CONFIG.repoKey, 'emerilansel-jpg/dunstan-research');
       const token = getSetting(CONFIG.tokenKey, DEFAULT_PAT);
       if (!repo || !token) { container.innerHTML = '<p>Configure settings first.</p>'; return; }
       container.innerHTML = '<p>Loading...</p>';
