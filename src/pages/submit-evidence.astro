@@ -8,7 +8,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p class="page-intro">We publish corrections when supported by qualifying evidence. Help us keep our research accurate and inspectable.</p>
 
     <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);padding:2rem;margin-top:2.5rem;">
-      <form action="mailto:corrections@dunstanresearch.com?subject=Evidence%20Submission" method="post" enctype="text/plain" style="display:grid;gap:1.25rem;">
+      <form id="evidence-form" action="mailto:corrections@dunstanresearch.com?subject=Evidence%20Submission" method="post" enctype="text/plain" style="display:grid;gap:1.25rem;">
         <div>
           <label for="report_url" style="display:block;font-weight:600;margin-bottom:0.35rem;">Report URL</label>
           <input type="url" id="report_url" name="report_url" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--color-border);border-radius:var(--radius);" placeholder="https://dunstanresearch.com/research/..." />
@@ -24,6 +24,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div>
           <label for="email" style="display:block;font-weight:600;margin-bottom:0.35rem;">Your Email</label>
           <input type="email" id="email" name="email" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--color-border);border-radius:var(--radius);" />
+        </div>
+        <div style="position:absolute;left:-5000px;" aria-hidden="true">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
         </div>
         <button type="submit" class="btn btn-primary" style="justify-self:start;">Submit Evidence</button>
       </form>
@@ -42,4 +45,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </div>
   </div>
+
+  <script>
+    const evidenceForm = document.getElementById('evidence-form');
+    evidenceForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(evidenceForm);
+      if (data.get('website')) {
+        return;
+      }
+      const reportUrl = data.get('report_url');
+      const claim = data.get('claim');
+      const evidence = data.get('evidence');
+      const email = data.get('email');
+      const subject = encodeURIComponent(`Evidence Submission — ${reportUrl}`);
+      const body = encodeURIComponent(`Report URL: ${reportUrl}\n\nClaim Being Disputed:\n${claim}\n\nOpposing Evidence:\n${evidence}\n\nSubmitter Email: ${email}`);
+      window.location.href = `mailto:corrections@dunstanresearch.com?subject=${subject}&body=${body}`;
+    });
+  </script>
 </BaseLayout>

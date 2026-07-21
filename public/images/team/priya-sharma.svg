@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240">
+  <rect width="400" height="240" fill="#E2E8F0"/>
+  <circle cx="200" cy="90" r="45" fill="#1B4D3E"/>
+  <text x="200" y="108" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="36" font-weight="700" fill="#FFFFFF">PS</text>
+  <text x="200" y="170" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="16" font-weight="600" fill="#1F2937">Dr. Priya Sharma</text>
+</svg>
