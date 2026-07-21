@@ -15,15 +15,37 @@
 
 <script>
   const newsletterForm = document.getElementById('newsletter-form');
-  newsletterForm?.addEventListener('submit', (e) => {
+  const newsletterStatus = document.createElement('div');
+  newsletterStatus.style.marginTop = '1rem';
+  newsletterForm?.after(newsletterStatus);
+  newsletterForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(newsletterForm);
     if (data.get('company')) {
       return;
     }
-    const email = data.get('email');
-    const subject = encodeURIComponent('Subscribe to Research Briefing');
-    const body = encodeURIComponent(`Please subscribe the following email address to the Research Briefing:\n\n${email}`);
-    window.location.href = `mailto:editorial@dunstanresearch.com?subject=${subject}&body=${body}`;
+    const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+    try {
+      const payload = {
+        site: 'dunstanresearch.com',
+        name: 'Newsletter Subscriber',
+        email: data.get('email'),
+        message: 'Subscribe to Research Briefing',
+        website: data.get('company') || '',
+      };
+      const res = await fetch('https://research-api.n311311.workers.dev/api/form/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Server error');
+      newsletterForm.reset();
+      newsletterStatus.innerHTML = '<p style="color:#fff;">Thank you for subscribing.</p>';
+    } catch (err) {
+      newsletterStatus.innerHTML = '<p style="color:#fff;">Sorry, something went wrong. Please try again later.</p>';
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 </script>

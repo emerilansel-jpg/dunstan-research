@@ -68,19 +68,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <script>
     const contactForm = document.getElementById('contact-form');
-    contactForm?.addEventListener('submit', (e) => {
+    const contactStatus = document.createElement('div');
+    contactStatus.id = 'contact-status';
+    contactForm?.after(contactStatus);
+    contactForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(contactForm);
       if (data.get('website')) {
         return;
       }
-      const name = data.get('name');
-      const email = data.get('email');
-      const topic = data.get('topic');
-      const message = data.get('message');
-      const subject = encodeURIComponent(`Contact: ${topic}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:research@dunstanresearch.com?subject=${subject}&body=${body}`;
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        const payload = {
+          site: 'dunstanresearch.com',
+          name: data.get('name'),
+          email: data.get('email'),
+          message: `Topic: ${data.get('topic')}\n\n${data.get('message')}`,
+          website: '',
+        };
+        const res = await fetch('https://research-api.n311311.workers.dev/api/form/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('Server error');
+        contactForm.reset();
+        contactStatus.innerHTML = '<p style="color:var(--color-success);margin-top:1rem;">Thank you. We have received your message.</p>';
+      } catch (err) {
+        contactStatus.innerHTML = '<p style="color:var(--color-danger);margin-top:1rem;">Sorry, something went wrong. Please try again later.</p>';
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
     });
   </script>
 </BaseLayout>
