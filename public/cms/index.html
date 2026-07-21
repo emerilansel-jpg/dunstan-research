@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin | Dunstan Research Group</title>
+  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
@@ -448,6 +449,12 @@
       return name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9._-]/g, '-').toLowerCase();
     }
 
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
     function setupPasteDrop() {
       const cm = mde.codemirror;
       cm.on('paste', (editor, e) => {
@@ -680,7 +687,7 @@
         } catch {}
 
         await githubApi(path, 'PUT', putBody);
-        status.innerHTML = `<div class="status success">Published! Article will be live at /research/${slug} after rebuild (~90s).</div>`;
+        status.innerHTML = `<div class="status success">Published! Article will be live at /research/${escapeHtml(slug)} after rebuild (~90s).</div>`;
       } catch (err) {
         status.innerHTML = `<div class="status error">Publish failed: ${err.message}</div>`;
       } finally {
