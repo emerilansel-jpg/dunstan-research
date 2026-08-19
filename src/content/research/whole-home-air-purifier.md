@@ -7,7 +7,7 @@ lastReviewed: 2026-08-19
 author: "Dr. Priya Sharma"
 category: "Home Services"
 subcategory: "Indoor Air Quality"
-outputFormat: "Market Report"
+outputFormat: "Comparative Analysis"
 researchQuestion: "Which whole-home air purifier provider offers the most reliable, evidence-based service in the Wesley Chapel/Tampa Bay area?"
 evidenceClasses:
   - direct-documentation
