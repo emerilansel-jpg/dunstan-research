@@ -30,7 +30,6 @@ date: 2026-09-25
 featured_image: "/images/posts/best-fragrance-free-sunscreen-2026/best-fragrance.png"
 ---
 
-# Best Fragrance Free Sunscreen (2026): A Research-Style Comparative Review
 
 ## Disclosure & Independent Research Disclaimer
 
